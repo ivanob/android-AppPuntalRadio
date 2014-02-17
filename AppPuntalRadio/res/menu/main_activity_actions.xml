@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+    
+    <item yourapp:showAsAction="ifRoom|withText"
+          android:id="@+id/action_search"
+          android:title="@string/action_search"/>
+    <item yourapp:showAsAction="ifRoom|withText"
+          android:id="@+id/action_compose"
+          android:title="@string/action_compose" />
+    
+</menu>
