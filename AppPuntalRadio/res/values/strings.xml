@@ -8,4 +8,8 @@
     <string name="action_compose">Accion1</string>
     <string name="action_search">Accion1</string>
     
+    <string name="portada_tab">Portada</string>
+    <string name="parrilla_tab">Parrilla</string>
+    <string name="programas_tab">Programas</string>
+    
 </resources>

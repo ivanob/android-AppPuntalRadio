@@ -2,11 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" 
     xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
     
-    <item yourapp:showAsAction="ifRoom|withText"
-          android:id="@+id/action_search"
+    <item yourapp:showAsAction="ifRoom"
+          android:id="@+id/action_playstop"
+          android:icon="@drawable/ic_action_stop_light"
           android:title="@string/action_search"/>
-    <item yourapp:showAsAction="ifRoom|withText"
-          android:id="@+id/action_compose"
-          android:title="@string/action_compose" />
     
 </menu>
