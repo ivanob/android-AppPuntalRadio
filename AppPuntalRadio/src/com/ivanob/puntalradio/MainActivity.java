@@ -20,8 +20,10 @@ public class MainActivity extends ActionBarActivity {
 		
 		// setup action bar for tabs
 	    ActionBar actionBar = getSupportActionBar();
+	    actionBar.setSubtitle("tu emisora online");
+	    actionBar.setTitle("Puntal Radio"); 
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-	    actionBar.setDisplayShowTitleEnabled(false);
+	    actionBar.setDisplayShowTitleEnabled(true);
 
 	    Tab tab = actionBar.newTab()
 	                       .setText(R.string.portada_tab)
@@ -54,10 +56,10 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void switchPlaystopButton(){
 		if(isPlaying){ //It is playing
-			playMenu.setIcon(R.drawable.ic_action_stop_light);
+			playMenu.setIcon(R.drawable.ic_action_pause_over_video);
 			isPlaying=false;
 		}else{ //It is stopped
-			playMenu.setIcon(R.drawable.ic_action_play_light);
+			playMenu.setIcon(R.drawable.ic_action_play_over_video);
 			isPlaying=true;
 		}
 	}

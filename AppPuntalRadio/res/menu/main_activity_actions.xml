@@ -4,7 +4,7 @@
     
     <item yourapp:showAsAction="ifRoom"
           android:id="@+id/action_playstop"
-          android:icon="@drawable/ic_action_stop_light"
+          android:icon="@drawable/ic_action_pause_over_video"
           android:title="@string/action_search"/>
     
 </menu>
