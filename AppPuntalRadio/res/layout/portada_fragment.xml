@@ -32,7 +32,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:background="@null"
                 android:fitsSystemWindows="false"
+                android:padding="@dimen/distance_media_buttons"
                 android:scaleType="fitCenter"
                 android:src="@drawable/twitter_64x64" />
 
@@ -40,18 +42,24 @@
                 android:id="@+id/imageButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@null"
+                android:padding="@dimen/distance_media_buttons"
                 android:src="@drawable/facebook_64x64" />
 
             <ImageButton
                 android:id="@+id/imageButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@null"
+                android:padding="@dimen/distance_media_buttons"
                 android:src="@drawable/blogger_64" />
 
             <ImageButton
                 android:id="@+id/imageButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@null"
+                android:padding="@dimen/distance_media_buttons"
                 android:src="@drawable/email_64" />
 
         </LinearLayout>

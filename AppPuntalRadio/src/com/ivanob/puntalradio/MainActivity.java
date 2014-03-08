@@ -1,17 +1,26 @@
 package com.ivanob.puntalradio;
 
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-public class MainActivity extends ActionBarActivity {
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuInflater;
+
+public class MainActivity extends SherlockFragmentActivity implements TabListener {
 	
 	public MenuItem playMenu;
 	private boolean isPlaying;
+	AppSectionsPagerAdapter mAppSectionsPagerAdapter;
+	ViewPager mViewPager;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +28,36 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		// setup action bar for tabs
-	    ActionBar actionBar = getSupportActionBar();
+	    final ActionBar actionBar = getSupportActionBar();
 	    actionBar.setSubtitle("tu emisora online");
 	    actionBar.setTitle("Puntal Radio"); 
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    actionBar.setDisplayShowTitleEnabled(true);
 
+	    mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager());
+	    mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mAppSectionsPagerAdapter);
+        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                // When swiping between different app sections, select the corresponding tab.
+                // We can also use ActionBar.Tab#select() to do this if we have a reference to the
+                // Tab.
+                actionBar.setSelectedNavigationItem(position);
+            }
+        });
+        
+        for (int i = 0; i < mAppSectionsPagerAdapter.getCount(); i++) {
+            // Create a tab with text corresponding to the page title defined by the adapter.
+            // Also specify this Activity object, which implements the TabListener interface, as the
+            // listener for when this tab is selected.
+            actionBar.addTab(
+                    actionBar.newTab()
+                            .setText(mAppSectionsPagerAdapter.getPageTitle(i))
+                            .setTabListener(this));
+        }
+	    
+	    /*
 	    Tab tab = actionBar.newTab()
 	                       .setText(R.string.portada_tab)
 	                       .setTabListener(new TabListener<PortadaFragment>(
@@ -41,10 +74,10 @@ public class MainActivity extends ActionBarActivity {
 	                   .setText(R.string.programas_tab)
 	                   .setTabListener(new TabListener<ProgramasFragment>(
 	                           this, "programas", ProgramasFragment.class));
-	    actionBar.addTab(tab);
+	    actionBar.addTab(tab);*/
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
 	    MenuInflater inflater = getMenuInflater();
@@ -52,7 +85,7 @@ public class MainActivity extends ActionBarActivity {
 	    playMenu = menu.findItem(R.id.action_playstop);
 	    isPlaying=true;
 	    return super.onCreateOptionsMenu(menu);
-	}
+	}*/
 	
 	private void switchPlaystopButton(){
 		if(isPlaying){ //It is playing
@@ -63,8 +96,25 @@ public class MainActivity extends ActionBarActivity {
 			isPlaying=true;
 		}
 	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	//To handle the action buttons
+	/*//To handle the action buttons
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
@@ -74,6 +124,6 @@ public class MainActivity extends ActionBarActivity {
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
-	}
+	}*/
 
 }

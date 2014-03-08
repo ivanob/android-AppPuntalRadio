@@ -1,6 +1,7 @@
 package com.ivanob.puntalradio;
 
-import com.ivanob.puntalradio.R.color;
+
+import com.actionbarsherlock.app.SherlockFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
