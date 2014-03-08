@@ -28,7 +28,7 @@
             android:gravity="top|center" >
 
             <ImageButton
-                android:id="@+id/imageButton1"
+                android:id="@+id/btnTwitter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -39,7 +39,7 @@
                 android:src="@drawable/twitter_64x64" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/btnFacebook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -47,7 +47,7 @@
                 android:src="@drawable/facebook_64x64" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/btnBlogger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -55,7 +55,7 @@
                 android:src="@drawable/blogger_64" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/btnEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"

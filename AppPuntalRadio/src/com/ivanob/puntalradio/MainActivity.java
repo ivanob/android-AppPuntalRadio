@@ -1,14 +1,20 @@
 package com.ivanob.puntalradio;
 
+import java.io.IOException;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnBufferingUpdateListener;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -18,14 +24,54 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	
 	public MenuItem playMenu;
 	private boolean isPlaying;
-	AppSectionsPagerAdapter mAppSectionsPagerAdapter;
-	ViewPager mViewPager;
+	private AppSectionsPagerAdapter mAppSectionsPagerAdapter;
+	private ViewPager mViewPager;
+	private StationConfigManager stationManager = StationConfigManager.getInstance();
+	private MediaPlayer mp;
 	
+	private void configMediaPlayer(){
+		mp = new MediaPlayer();
+		try {
+        	mp.setDataSource(stationManager.getStationURL());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		mp.setOnBufferingUpdateListener(new OnBufferingUpdateListener() {
+
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                //playSeekBar.setSecondaryProgress(percent);
+                //Log.i("Buffering", "" + percent);
+            }
+        });
+        mp.prepareAsync();
+
+        mp.setOnPreparedListener(new OnPreparedListener() {
+
+            public void onPrepared(MediaPlayer mp) {
+            	resumePlayer();
+            }
+        });
+	}
+	
+	private void stopPlayer(){
+    	mp.pause();
+    	//mp.release();
+    }
+	
+	private void resumePlayer(){
+		mp.start();
+		Toast.makeText(getApplicationContext(), "Conectado a Puntal Radio", Toast.LENGTH_SHORT).show();
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		configMediaPlayer();
 		
 		// setup action bar for tabs
 	    final ActionBar actionBar = getSupportActionBar();
@@ -56,25 +102,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
                             .setText(mAppSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
-	    
-	    /*
-	    Tab tab = actionBar.newTab()
-	                       .setText(R.string.portada_tab)
-	                       .setTabListener(new TabListener<PortadaFragment>(
-	                               this, "portada", PortadaFragment.class));
-	    actionBar.addTab(tab);
-
-	    tab = actionBar.newTab()
-                .setText(R.string.parrilla_tab)
-                .setTabListener(new TabListener<ParrillaFragment>(
-                        this, "parrilla", ParrillaFragment.class));
-	    actionBar.addTab(tab);
- 
-	    tab = actionBar.newTab()
-	                   .setText(R.string.programas_tab)
-	                   .setTabListener(new TabListener<ProgramasFragment>(
-	                           this, "programas", ProgramasFragment.class));
-	    actionBar.addTab(tab);*/
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,12 +114,14 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	}
 	
 	private void switchPlaystopButton(){
-		if(isPlaying){ //It is playing
-			playMenu.setIcon(R.drawable.ic_action_pause_over_video);
-			isPlaying=false;
-		}else{ //It is stopped
+		if(isPlaying){ //It is playing, so I have to stop it
 			playMenu.setIcon(R.drawable.ic_action_play_over_video);
+			isPlaying=false;
+			stopPlayer();
+		}else{ //It is stopped, so I have to play it
+			playMenu.setIcon(R.drawable.ic_action_pause_over_video);
 			isPlaying=true;
+			resumePlayer();
 		}
 	}
 
