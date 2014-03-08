@@ -34,7 +34,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    actionBar.setDisplayShowTitleEnabled(true);
 
-	    mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager());
+	    mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager(), this.getApplicationContext());
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mAppSectionsPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -77,15 +77,14 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	    actionBar.addTab(tab);*/
 	}
 
-	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.main_activity_actions, menu);
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.main_activity_actions, (com.actionbarsherlock.view.Menu) menu);
 	    playMenu = menu.findItem(R.id.action_playstop);
 	    isPlaying=true;
 	    return super.onCreateOptionsMenu(menu);
-	}*/
+	}
 	
 	private void switchPlaystopButton(){
 		if(isPlaying){ //It is playing
@@ -99,7 +98,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
+		mViewPager.setCurrentItem(tab.getPosition());
 		
 	}
 
@@ -114,7 +113,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		
 	}
 	
-	/*//To handle the action buttons
+	//To handle the action buttons
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
@@ -124,6 +123,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
-	}*/
+	}
 
 }
