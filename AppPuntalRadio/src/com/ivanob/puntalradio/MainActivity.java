@@ -8,6 +8,7 @@ import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -26,61 +27,23 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	private boolean isPlaying;
 	private AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 	private ViewPager mViewPager;
-	private StationConfigManager stationManager = StationConfigManager.getInstance();
-	private MediaPlayer mp;
+	private RadioManager rm;
 	
-	private void configMediaPlayer(){
-		mp = new MediaPlayer();
-		try {
-        	mp.setDataSource(stationManager.getStationURL());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		mp.setOnBufferingUpdateListener(new OnBufferingUpdateListener() {
-
-            public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                //playSeekBar.setSecondaryProgress(percent);
-                //Log.i("Buffering", "" + percent);
-            }
-        });
-        mp.prepareAsync();
-
-        mp.setOnPreparedListener(new OnPreparedListener() {
-
-            public void onPrepared(MediaPlayer mp) {
-            	resumePlayer();
-            }
-        });
-	}
-	
-	private void stopPlayer(){
-    	mp.pause();
-    	//mp.release();
-    }
-	
-	private void resumePlayer(){
-		mp.start();
-		Toast.makeText(getApplicationContext(), "Conectado a Puntal Radio", Toast.LENGTH_SHORT).show();
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		configMediaPlayer();
+		Context context = this.getApplicationContext();
+		rm = new RadioManager(context);
 		
 		// setup action bar for tabs
 	    final ActionBar actionBar = getSupportActionBar();
-	    actionBar.setSubtitle("tu emisora online");
-	    actionBar.setTitle("Puntal Radio"); 
+	    actionBar.setSubtitle(getResources().getString(R.string.subtitle_actionbar));
+	    actionBar.setTitle(getResources().getString(R.string.title_actionbar)); 
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    actionBar.setDisplayShowTitleEnabled(true);
 
-	    mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager(), this.getApplicationContext());
+	    mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager(), context);
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mAppSectionsPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -110,6 +73,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		inflater.inflate(R.menu.main_activity_actions, (com.actionbarsherlock.view.Menu) menu);
 	    playMenu = menu.findItem(R.id.action_playstop);
 	    isPlaying=true;
+	    //inflater.inflate(R.menu.main_menu, menu);
 	    return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -117,11 +81,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		if(isPlaying){ //It is playing, so I have to stop it
 			playMenu.setIcon(R.drawable.ic_action_play_over_video);
 			isPlaying=false;
-			stopPlayer();
+			rm.pausePlayer();
 		}else{ //It is stopped, so I have to play it
 			playMenu.setIcon(R.drawable.ic_action_pause_over_video);
 			isPlaying=true;
-			resumePlayer();
+			rm.resumePlayer();
 		}
 	}
 
@@ -142,6 +106,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		
 	}
 	
+	private void exitApplication(){
+		rm.stopPlayer();
+		finish();
+	}
+	
 	//To handle the action buttons
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
@@ -149,6 +118,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	        case R.id.action_playstop:
 	        	switchPlaystopButton();
 	            return true;
+	        case R.id.menu_exit:
+	        	exitApplication();
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }

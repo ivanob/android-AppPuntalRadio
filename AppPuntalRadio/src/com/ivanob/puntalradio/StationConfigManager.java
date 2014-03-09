@@ -1,5 +1,11 @@
 package com.ivanob.puntalradio;
 
+/**
+ * Reads the .pls file to provide the configuration to connect to the
+ * station
+ * @author ivan
+ *
+ */
 public class StationConfigManager {
 	
 	private static StationConfigManager instance = null;

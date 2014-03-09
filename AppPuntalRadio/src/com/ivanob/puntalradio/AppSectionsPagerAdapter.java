@@ -10,7 +10,7 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 	private int[] tabNames = {R.string.portada_tab,
 			R.string.parrilla_tab,
 			R.string.programas_tab
-			};
+		};
 	private Context context;
 	
     public AppSectionsPagerAdapter(FragmentManager fm, Context nContext) {
