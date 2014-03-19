@@ -17,6 +17,8 @@ public class StationConfigManager {
 		return instance;
 	}
 	
+	private StationConfigManager(){}
+	
 	public String getStationURL(){
 		return "http://5.39.76.68:8036/";
 	}

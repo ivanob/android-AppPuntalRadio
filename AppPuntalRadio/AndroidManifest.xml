@@ -16,6 +16,8 @@
         android:theme="@style/Theme.Racing" >
         <activity
             android:name="com.ivanob.puntalradio.MainActivity"
+            
+            android:configChanges="screenSize|keyboardHidden"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

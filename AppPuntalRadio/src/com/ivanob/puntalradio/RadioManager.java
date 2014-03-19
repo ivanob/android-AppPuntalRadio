@@ -11,10 +11,19 @@ import android.widget.Toast;
 public class RadioManager {
 	
 	private StationConfigManager stationManager = StationConfigManager.getInstance();
+	private static RadioManager instance = null;
 	private MediaPlayer mp;
 	private Context context;
+	
+	public static RadioManager getInstance(Context context) {
+		if(instance == null) {
+			instance = new RadioManager(context);
+		}
+		return instance;
+	}
+	
 
-	public RadioManager(Context context){
+	private RadioManager(Context context){
 		this.context=context;
 		mp = new MediaPlayer();
 		try {

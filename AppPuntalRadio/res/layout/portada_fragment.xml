@@ -13,7 +13,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="21dp"
             android:layout_centerHorizontal="true"
-            android:background="@color/negro"
             android:padding="@dimen/margin_logo_portada"
             android:src="@drawable/logo_portada" />
 

@@ -24,7 +24,7 @@ import com.actionbarsherlock.view.MenuInflater;
 public class MainActivity extends SherlockFragmentActivity implements TabListener {
 	
 	public MenuItem playMenu;
-	private boolean isPlaying;
+	private boolean isPlaying=false;
 	private AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 	private ViewPager mViewPager;
 	private RadioManager rm;
@@ -34,7 +34,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Context context = this.getApplicationContext();
-		rm = new RadioManager(context);
+		rm = RadioManager.getInstance(context);
 		
 		// setup action bar for tabs
 	    final ActionBar actionBar = getSupportActionBar();
