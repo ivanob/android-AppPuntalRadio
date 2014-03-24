@@ -9,12 +9,17 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
@@ -24,11 +29,11 @@ import com.actionbarsherlock.view.MenuInflater;
 public class MainActivity extends SherlockFragmentActivity implements TabListener {
 	
 	public MenuItem playMenu;
-	private boolean isPlaying=false;
 	private AppSectionsPagerAdapter mAppSectionsPagerAdapter;
 	private ViewPager mViewPager;
 	private RadioManager rm;
-	
+	private boolean _doubleBackToExitPressedOnce = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,6 +70,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
                             .setText(mAppSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+        
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,20 +78,23 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.main_activity_actions, (com.actionbarsherlock.view.Menu) menu);
 	    playMenu = menu.findItem(R.id.action_playstop);
-	    isPlaying=true;
 	    //inflater.inflate(R.menu.main_menu, menu);
+	    //Actualizo el icono del play/stop
+	    if(rm.isPlaying()){
+	    	playMenu.setIcon(R.drawable.ic_action_pause_over_video);
+	    }else{
+	    	playMenu.setIcon(R.drawable.ic_action_play_over_video);
+	    }
 	    return super.onCreateOptionsMenu(menu);
 	}
 	
 	private void switchPlaystopButton(){
-		if(isPlaying){ //It is playing, so I have to stop it
-			playMenu.setIcon(R.drawable.ic_action_play_over_video);
-			isPlaying=false;
+		if(rm.isPlaying()){ //It is playing, so I have to stop it
 			rm.pausePlayer();
+			playMenu.setIcon(R.drawable.ic_action_play_over_video);
 		}else{ //It is stopped, so I have to play it
-			playMenu.setIcon(R.drawable.ic_action_pause_over_video);
-			isPlaying=true;
 			rm.resumePlayer();
+			playMenu.setIcon(R.drawable.ic_action_pause_over_video);
 		}
 	}
 
@@ -106,10 +115,14 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		
 	}
 	
-	private void exitApplication(){
-		rm.stopPlayer();
-		finish();
-	}
+	
+	public void onDestroy()
+    {
+        super.onDestroy();
+        // This code will be called when the activity is killed.
+        // When will it be killed? you don't really know in most cases so the best thing to do 
+        // is to assume you don't know when it be killed.
+    }
 	
 	//To handle the action buttons
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -119,11 +132,53 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	        	switchPlaystopButton();
 	            return true;
 	        case R.id.menu_exit:
-	        	exitApplication();
+	        	rm.pausePlayer();
+	        	super.onBackPressed();
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	
+	public void onBackPressed() {
+	    if (_doubleBackToExitPressedOnce) {
+	        super.onBackPressed();
+	        rm.pausePlayer();
+	        return;
+	    }
+	    this._doubleBackToExitPressedOnce = true;
+	    Toast.makeText(this, "Pulsa de nuevo para salir", Toast.LENGTH_SHORT).show();
+	    new Handler().postDelayed(new Runnable() {
+	        @Override
+	        public void run() {
+	            _doubleBackToExitPressedOnce = false;
+	        }
+	    }, 2000);
+	}
+	
+	/* Sirve para evitar que se ponga en play si cambiamos de landscape a portrait
+	 * y viceversa, cuando el reproductor esta parado.
+	 */
+/*	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+	    avoidReload=true;
+	    setContentView(R.layout.activity_main);
+	    
+	    FrameLayout frameLayout = new FrameLayout(this.get);
+	    frameLayout. removeAllViews();
+
+	    LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    View view = inflater.inflate(R.layout.activity_main, null);
+
+	    frameLayout .addView(view);
+	    //this.recreate();
+	    
+	    // Checks the orientation of the screen
+	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+	    }
+	}*/
 
 }
