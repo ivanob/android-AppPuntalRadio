@@ -6,8 +6,8 @@
     <string name="title_actionbar">Puntal Radio</string>
     <string name="subtitle_actionbar">tu emisora online</string>
     
-    <string name="action_compose">Accion1</string>
-    <string name="action_search">Accion1</string>
+    <string name="action_temporizador">Modo sleep</string>
+    <string name="action_play">Play/stop</string>
     
     <string name="portada_tab">Portada</string>
     <string name="parrilla_tab">Parrilla</string>

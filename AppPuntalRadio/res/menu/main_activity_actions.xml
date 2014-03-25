@@ -2,10 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" 
     xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
     
+    	<item android:showAsAction="ifRoom"
+          android:id="@+id/action_sleep"
+          android:icon="@drawable/ic_action_alarms"
+          android:title="@string/action_temporizador"/>
+      
       <item android:showAsAction="ifRoom"
           android:id="@+id/action_playstop"
           android:icon="@drawable/ic_action_pause_over_video"
-          android:title="@string/action_search"/>
+          android:title="@string/action_play"/>
+      
       
       
       <item

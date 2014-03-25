@@ -1,30 +1,24 @@
 package com.ivanob.puntalradio;
 
-import java.io.IOException;
+import java.util.Timer;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnBufferingUpdateListener;
-import android.media.MediaPlayer.OnPreparedListener;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import static com.ivanob.puntalradio.Consts.*;
 
 public class MainActivity extends SherlockFragmentActivity implements TabListener {
 	
@@ -33,6 +27,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	private ViewPager mViewPager;
 	private RadioManager rm;
 	private boolean _doubleBackToExitPressedOnce = false;
+	private final CharSequence[] items = {" Ninguno "," Parar en 15min "," Parar en 30min "," Parar en 1h "};
+	private AlertDialog levelDialog;
+	private int lastOptionTemp=0;
+	private Timer timer=new Timer();
+	private TimerSleepMode timerTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,10 +118,16 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	public void onDestroy()
     {
         super.onDestroy();
+        rm.stopPlayer();
         // This code will be called when the activity is killed.
         // When will it be killed? you don't really know in most cases so the best thing to do 
         // is to assume you don't know when it be killed.
     }
+	
+	public void closeApp(){
+		rm.pausePlayer();
+		finish();
+	}
 	
 	//To handle the action buttons
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -131,19 +136,60 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	        case R.id.action_playstop:
 	        	switchPlaystopButton();
 	            return true;
+	        case R.id.action_sleep:
+	        	showSleepPopup();
+	        	return true;
 	        case R.id.menu_exit:
 	        	rm.pausePlayer();
-	        	super.onBackPressed();
+	        	closeApp();
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
 	
+	private void setTimerSleepMode(long delay){
+		if(timerTask!=null){
+			timerTask.cancel(); //Cancelo el temporizador anterior
+		}
+		timerTask = new TimerSleepMode(this);
+		timer.schedule(timerTask, delay);
+	}
+	
+	private void showSleepPopup() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Modo sleep");
+        builder.setSingleChoiceItems(items, lastOptionTemp, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+        	if(lastOptionTemp != item){ //Si se marco la misma opcion entonces no se hace nada
+        		lastOptionTemp = item;
+        		switch(item){
+	                case NO_SLEEP:
+	                	break;
+	                case SLEEP_15MIN:
+                		setTimerSleepMode(MIN15_MILISEC);
+                        break;
+	                case SLEEP_30MIN:
+	                	setTimerSleepMode(MIN30_MILISEC);
+                		break;
+	                case SLEEP_1H:   
+	                	setTimerSleepMode(H1_MILISEC);
+	                	break;
+	                
+	            }
+        	}
+            levelDialog.dismiss();
+            //Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+            }
+        });
+        levelDialog = builder.create();
+        levelDialog.show();
+	}
+
 	public void onBackPressed() {
 	    if (_doubleBackToExitPressedOnce) {
-	        super.onBackPressed();
-	        rm.pausePlayer();
+	        //super.onBackPressed();
+	    	closeApp();
 	        return;
 	    }
 	    this._doubleBackToExitPressedOnce = true;
