@@ -118,7 +118,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	public void onDestroy()
     {
         super.onDestroy();
-        rm.stopPlayer();
+        //rm.stopPlayer();
         // This code will be called when the activity is killed.
         // When will it be killed? you don't really know in most cases so the best thing to do 
         // is to assume you don't know when it be killed.
@@ -127,6 +127,12 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	public void closeApp(){
 		rm.pausePlayer();
 		finish();
+	}
+	
+	private void showAboutDialog(){
+		AboutDialog about = new AboutDialog(this);
+		about.setTitle("about this app");
+		about.show();
 	}
 	
 	//To handle the action buttons
@@ -138,6 +144,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	            return true;
 	        case R.id.action_sleep:
 	        	showSleepPopup();
+	        	return true;
+	        case R.id.menu_about:
+	        	showAboutDialog();
 	        	return true;
 	        case R.id.menu_exit:
 	        	rm.pausePlayer();
@@ -165,6 +174,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         		lastOptionTemp = item;
         		switch(item){
 	                case NO_SLEEP:
+	                	if(timerTask!=null){
+	            			timerTask.cancel(); //Cancelo el temporizador anterior
+	            		}
 	                	break;
 	                case SLEEP_15MIN:
                 		setTimerSleepMode(MIN15_MILISEC);
