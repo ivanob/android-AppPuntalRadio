@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<programas>
+	<programa nombre="Por la banda">
+		<fichero>banda.xml</fichero>
+		<media>
+			<podcast>http://www.ivoox.com/podcast-por-banda_sq_f168759.5797922_1.html</podcast>
+			<facebook>http://www.facebook.com/groups/327572060681281/</facebook>
+		</media>
+	</programa>
+</programas>

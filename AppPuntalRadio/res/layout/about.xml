@@ -39,7 +39,7 @@ android:id="@+id/info_text"
 android:gravity="center"
 android:layout_gravity="center"
 android:layout_width="fill_parent"
-
+android:textSize="12dip"
 
 android:layout_height="fill_parent" />
 

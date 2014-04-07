@@ -32,6 +32,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	private int lastOptionTemp=0;
 	private Timer timer=new Timer();
 	private TimerSleepMode timerTask;
+	private RadioProgrammingManager progManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		setContentView(R.layout.activity_main);
 		Context context = this.getApplicationContext();
 		rm = RadioManager.getInstance(context);
+		progManager= RadioProgrammingManager.getInstance(this.getResources());
 		
 		// setup action bar for tabs
 	    final ActionBar actionBar = getSupportActionBar();
@@ -131,7 +133,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	
 	private void showAboutDialog(){
 		AboutDialog about = new AboutDialog(this);
-		about.setTitle("about this app");
+		about.setTitle("Acerca de");
 		about.show();
 	}
 	
