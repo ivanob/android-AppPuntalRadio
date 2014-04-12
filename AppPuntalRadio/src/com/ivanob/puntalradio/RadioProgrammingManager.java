@@ -75,16 +75,16 @@ public class RadioProgrammingManager {
                     break;
 				case XmlPullParser.END_TAG:
 					if (tagname.equalsIgnoreCase("programa")) {
-                        // add employee object to list
-                        //employees.add(employee);
 						listPrograms.add(program);
                     }else if (tagname.equalsIgnoreCase("podcast")) {
                         String s = text;
-                    	int a=3;
+                    	program.addMediaURL("podcast", s);
                     }else if (tagname.equalsIgnoreCase("facebook")) {
-                        //employee.setName(text);
                     	String s = text;
-                    	int a=3;
+                    	program.addMediaURL("facebook", s);
+                    }else if (tagname.equalsIgnoreCase("blog")) {
+                    	String s = text;
+                    	program.addMediaURL("blog", s);
                     }  
 					break;
 					

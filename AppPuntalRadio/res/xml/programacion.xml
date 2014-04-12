@@ -8,4 +8,82 @@
 			<facebook>http://www.facebook.com/groups/327572060681281/</facebook>
 		</media>
 	</programa>
+	
+	<programa nombre="El Cutio">
+		<fichero>cutio.xml</fichero>
+		<media>
+			<podcast>http://www.ivoox.com/cutio_sq_f187218.5797922_1.html</podcast>
+			<facebook>https://www.facebook.com/groups/201854753297485/?fref=ts</facebook>
+		</media>
+	</programa>
+	
+	<programa nombre="Piensa en cines">
+		<fichero>cines.xml</fichero>
+		<media>
+			<blog>http://piensaencines.blogspot.com/</blog>
+			<podcast>http://www.ivoox.com/podcast-piensaencines_sq_f168234.5797922_1.html</podcast>
+			<facebook>https://www.facebook.com/pages/Piensaencines/361323943987925</facebook>
+		</media>
+	</programa>
+	
+	<programa nombre="5 inicial">
+		<fichero>5inicial.xml</fichero>
+		<media>
+			<podcast>http://www.ivoox.com/podcast-5-inicial_sq_f184553.5797922_1.html</podcast>
+		</media>
+	</programa>
+	
+	<programa nombre="Planeta Rugby">
+		<fichero>rugby.xml</fichero>
+		<media>
+			<podcast>http://www.ivoox.com/podcast-5-inicial_sq_f184553.5797922_1.html</podcast>
+		</media>
+	</programa>
+	
+	<programa nombre="A pie de campo">
+		<fichero>piecampo.xml</fichero>
+		<media>
+			<podcast>http://www.ivoox.com/a-pie-campo_sq_f184789.5797922_1.html</podcast>
+		</media>
+	</programa>
+	
+	<programa nombre="Cambio de ritmo">
+		<fichero>ritmo.xml</fichero>
+		<media>
+			<podcast>http://www.ivoox.com/podcast-cambio-ritmo_sq_f184994.5797922_1.html</podcast>
+		</media>
+	</programa>
+	
+	<programa nombre="Stick">
+		<fichero>stick.xml</fichero>
+		<media>
+			<podcast>http://www.ivoox.com/stick_sq_f185032.5797922_1.html</podcast>
+		</media>
+	</programa>
+	
+	<programa nombre="Fraggle-Rock">
+		<fichero>fraggle.xml</fichero>
+		<media>
+		</media>
+	</programa>
+	
+	<programa nombre="La cocina mágica">
+		<fichero>cocina.xml</fichero>
+		<media>
+		</media>
+	</programa>
+	
+	<programa nombre="No solo 80's">
+		<fichero>nosolo80.xml</fichero>
+		<media>
+			<podcast>http://www.ivoox.com/podcast-no-solo-80-s_sq_f168390.5797922_1.html</podcast>
+			<facebook>https://www.facebook.com/groups/NoSoloOchentas/</facebook>
+		</media>
+	</programa>
+	
+	<programa nombre="En directo">
+		<fichero>directo.xml</fichero>
+		<media>
+		</media>
+	</programa>
 </programas>
