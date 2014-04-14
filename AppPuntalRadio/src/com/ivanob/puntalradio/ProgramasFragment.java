@@ -1,6 +1,8 @@
 package com.ivanob.puntalradio;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -29,74 +31,81 @@ public class ProgramasFragment extends Fragment{
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
 		/* Find Tablelayout defined in main.xml */
-		TableLayout tl = (TableLayout) getView().findViewById(R.id.idTablaProgramas);
+		TableLayout tl=(TableLayout)getActivity().findViewById(R.id.idTablaProgramas); 
+		tl.setColumnStretchable(1, true); //Importante para hacer la separacion de columnas
+		tl.setColumnStretchable(2, true);
+		tl.setColumnStretchable(3, true);
+		tl.setColumnStretchable(4, true);
 		
 		/* Create a Button to be the row-content. */
 		for(int i=0; i<progManager.getNumPrograms(); i++){
-			RadioProgram prog = progManager.getProgram(i);
-			/* Create a new row to be added. */
-			/*TableRow tr = new TableRow(getActivity());
-			TableLayout.LayoutParams tableRowParams=
-					  new TableLayout.LayoutParams
-					  (TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-			tableRowParams.setMargins(5, 5, 5, 5);
-			tr.setLayoutParams(tableRowParams);
-			TextView textView = new TextView(getActivity());
-			textView.setText(prog.getNombre());
-			//textView.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-			tr.addView(textView);
-			if(prog.getMediaURL("facebook")!=null){
-				ImageButton b1 = new ImageButton(getActivity());
-		        b1.setId(100 + i);
-		        b1.setBackgroundColor(Color.TRANSPARENT);
-		        b1.setImageResource(R.drawable.facebook_64x64);
-		        tr.addView(b1);
-			}
-			tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-		*/
-			TableRow tr=new TableRow(getActivity());
-			
+			final RadioProgram prog = progManager.getProgram(i);
+			TableRow tr = new TableRow(getActivity());
 			tr.setPadding(10, 10, 10, 10);
-			TextView textView = new TextView(getActivity());
-			textView.setText(prog.getNombre());
-			textView.setTextSize(14);
-			textView.setGravity(Gravity.CENTER_VERTICAL);
-			tr.addView(textView);
-			LinearLayout botonera = new LinearLayout(getActivity());
+			tr.setGravity(Gravity.CENTER_VERTICAL);
+			
+			//Add the label with the name of the program
+			TextView nombreProg = new TextView(getActivity());
+			nombreProg.setText(prog.getNombre());
+			//textView.setTextSize(14);
+			nombreProg.setTextAppearance(getActivity(), R.style.boldText);
+			//nombreProg.setBackgroundResource(R.color.highlightedTextViewColor);
+			tr.addView(nombreProg);
+			
+			//LinearLayout botonera = new LinearLayout(getActivity());
+			//botonera.setPadding(0,0,0,0);
+			//Add the buttons of the media corresponding a program
 			if(prog.getMediaURL("facebook")!=null){
 				ImageButton b1 = new ImageButton(getActivity());
 		        b1.setId(100 + i);
 		        b1.setBackgroundColor(Color.TRANSPARENT);
 		        b1.setImageResource(R.drawable.facebook_64x64);
-		        botonera.addView(b1);
+		        b1.setOnClickListener(new View.OnClickListener() {
+		            public void onClick(View v) {
+		            	String url = prog.getMediaURL("facebook"); 
+		                Intent i = new Intent(Intent.ACTION_VIEW); 
+		                i.setData(Uri.parse(url)); 
+		                startActivity(i);
+		            }
+		        });
+		        tr.addView(b1);
 			}
 			if(prog.getMediaURL("podcast")!=null){
 				ImageButton b1 = new ImageButton(getActivity());
 		        b1.setId(100 + i);
 		        b1.setBackgroundColor(Color.TRANSPARENT);
-		        b1.setImageResource(R.drawable.blogger_64);
-		        botonera.addView(b1);
+		        b1.setImageResource(R.drawable.ivoox_64);
+		        b1.setOnClickListener(new View.OnClickListener() {
+		            public void onClick(View v) {
+		            	String url = prog.getMediaURL("podcast"); 
+		                Intent i = new Intent(Intent.ACTION_VIEW); 
+		                i.setData(Uri.parse(url)); 
+		                startActivity(i);
+		            }
+		        });
+		        tr.addView(b1);
 			}
 			if(prog.getMediaURL("blog")!=null){
 				ImageButton b1 = new ImageButton(getActivity());
 		        b1.setId(100 + i);
 		        b1.setBackgroundColor(Color.TRANSPARENT);
 		        b1.setImageResource(R.drawable.blogger_64);
-		        botonera.addView(b1);
+		        b1.setOnClickListener(new View.OnClickListener() {
+		            public void onClick(View v) {
+		            	String url = prog.getMediaURL("blog"); 
+		                Intent i = new Intent(Intent.ACTION_VIEW); 
+		                i.setData(Uri.parse(url)); 
+		                startActivity(i);
+		            }
+		        });
+		        tr.addView(b1);
 			}
-			botonera.setPadding(0, 0, 0, 0);
-			botonera.setGravity(Gravity.RIGHT);
-			tr.addView(botonera);
-			tl.addView(tr);
+			//botonera.setGravity(Gravity.CENTER_VERTICAL);
+			//tr.addView(botonera);
+			
+			tl.addView(tr); //Add the row to the table
 		}
-//		Button b = new Button(getActivity());
-//		b.setText("Dynamic Button");
-//		b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-//		/* Add Button to row. */
-//		tr.addView(b);
-//		/* Add row to TableLayout. */
-//		//tr.setBackgroundResource(R.drawable.sf_gradient_03);
-//		tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+		
 		super.onActivityCreated(savedInstanceState);
 	}
 }

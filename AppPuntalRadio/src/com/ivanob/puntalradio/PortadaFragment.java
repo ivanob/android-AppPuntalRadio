@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class PortadaFragment extends Fragment {
 	
@@ -49,6 +50,26 @@ public class PortadaFragment extends Fragment {
                 Intent i = new Intent(Intent.ACTION_VIEW); 
                 i.setData(Uri.parse(url)); 
                 startActivity(i);
+            }
+        });
+		//Listener del boton correo
+		ImageButton btnCorreo = (ImageButton) getView().findViewById(R.id.btnEmail);
+		btnCorreo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	Intent i = new Intent(Intent.ACTION_SENDTO,
+            			Uri.fromParts("mailto", "puntalradio@puntalradio.com", null));
+            	/*i.putExtra(Intent.EXTRA_SUBJECT, "Titulo");
+            	i.putExtra(Intent.EXTRA_TEXT, "Mensaje");*/
+            	
+            	/*Intent i2 = Intent.createChooser(i, "Elije tu aplicación de email");
+            	i2.setType("message/rfc822");
+            	startActivity(i2);
+//            	try{
+//            		startActivity(i);
+//            	}catch(Exception ex){
+//            		//Toast.makeText(this., text, duration)
+//            	}*/
+            	
             }
         });
         super.onActivityCreated(savedInstanceState);

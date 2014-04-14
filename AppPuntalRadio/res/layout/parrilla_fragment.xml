@@ -5,4 +5,13 @@
     android:background="@color/verde_bg_fragmento"
     android:gravity="center">
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Información no disponible"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </RelativeLayout>

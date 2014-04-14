@@ -27,7 +27,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	private ViewPager mViewPager;
 	private RadioManager rm;
 	private boolean _doubleBackToExitPressedOnce = false;
-	private final CharSequence[] items = {" Ninguno "," Parar en 15min "," Parar en 30min "," Parar en 1h "};
+	private final CharSequence[] items = {" Ninguno "," Parar en 15 min "," Parar en 30 min "," Parar en 1 h "};
 	private AlertDialog levelDialog;
 	private int lastOptionTemp=0;
 	private Timer timer=new Timer();

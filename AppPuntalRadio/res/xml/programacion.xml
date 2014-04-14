@@ -64,12 +64,15 @@
 	<programa nombre="Fraggle-Rock">
 		<fichero>fraggle.xml</fichero>
 		<media>
+			<facebook>https://www.facebook.com/pages/Fraggle-Rock-Radio/1410110865920256</facebook>
 		</media>
 	</programa>
 	
 	<programa nombre="La cocina mágica">
 		<fichero>cocina.xml</fichero>
 		<media>
+			<podcast>http://www.ivoox.com/podcast-cocina-magica_sq_f198504_1.html</podcast>
+
 		</media>
 	</programa>
 	

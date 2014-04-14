@@ -17,4 +17,7 @@
     
     <string name="connected_msg">Conectado a Puntal Radio</string>
     
+    <color name="highlightedTextViewColor">#000088</color>
+	<color name="normalTextViewColor">#000044</color>
+    
 </resources>
