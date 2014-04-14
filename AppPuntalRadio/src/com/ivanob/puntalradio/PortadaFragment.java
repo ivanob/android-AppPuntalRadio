@@ -56,20 +56,16 @@ public class PortadaFragment extends Fragment {
 		ImageButton btnCorreo = (ImageButton) getView().findViewById(R.id.btnEmail);
 		btnCorreo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	Intent i = new Intent(Intent.ACTION_SENDTO,
-            			Uri.fromParts("mailto", "puntalradio@puntalradio.com", null));
-            	/*i.putExtra(Intent.EXTRA_SUBJECT, "Titulo");
-            	i.putExtra(Intent.EXTRA_TEXT, "Mensaje");*/
-            	
-            	/*Intent i2 = Intent.createChooser(i, "Elije tu aplicación de email");
-            	i2.setType("message/rfc822");
-            	startActivity(i2);
-//            	try{
-//            		startActivity(i);
-//            	}catch(Exception ex){
-//            		//Toast.makeText(this., text, duration)
-//            	}*/
-            	
+            	Intent i = new Intent(Intent.ACTION_SEND);
+            	i.setType("message/rfc822");
+            	i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"puntalradio@puntalradio.com"});
+            	//i.putExtra(Intent.EXTRA_SUBJECT, "titulo");
+            	//i.putExtra(Intent.EXTRA_TEXT   , "mensaje");
+            	try {
+            	    startActivity(Intent.createChooser(i, "Enviando correo..."));
+            	} catch (android.content.ActivityNotFoundException ex) {
+            	    Toast.makeText(getActivity(), "No hay ningún cliente de correo instalado.", Toast.LENGTH_SHORT).show();
+            	}
             }
         });
         super.onActivityCreated(savedInstanceState);
