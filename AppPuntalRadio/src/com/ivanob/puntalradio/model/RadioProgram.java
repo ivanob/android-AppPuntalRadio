@@ -1,4 +1,4 @@
-package com.ivanob.puntalradio;
+package com.ivanob.puntalradio.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,9 @@ import java.util.Map;
 public class RadioProgram {
 	private String nombre;
 	private String ficheroDesc;
+	private int idLogo;
+	private String descripcion;
+	private String horario;
 	private Map <String, String> media = new HashMap<String, String>();
 
 	public String getNombre() {
@@ -30,6 +33,30 @@ public class RadioProgram {
 	
 	public void addMediaURL(String service, String url){
 		media.put(service,url);
+	}
+
+	public int getIdLogo() {
+		return idLogo;
+	}
+
+	public void setIdLogo(int idLogo) {
+		this.idLogo = idLogo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
 	}
 	
 }

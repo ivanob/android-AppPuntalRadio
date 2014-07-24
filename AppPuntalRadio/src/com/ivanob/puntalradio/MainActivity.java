@@ -18,6 +18,9 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.ivanob.puntalradio.model.RadioManager;
+import com.ivanob.puntalradio.model.RadioProgrammingManager;
+
 import static com.ivanob.puntalradio.Consts.*;
 
 public class MainActivity extends SherlockFragmentActivity implements TabListener {

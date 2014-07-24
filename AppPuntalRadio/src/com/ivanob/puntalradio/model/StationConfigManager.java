@@ -1,4 +1,4 @@
-package com.ivanob.puntalradio;
+package com.ivanob.puntalradio.model;
 
 /**
  * Reads the .pls file to provide the configuration to connect to the

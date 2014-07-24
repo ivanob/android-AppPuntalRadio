@@ -10,6 +10,7 @@ import android.text.Html;
 import android.text.util.Linkify;
 import android.graphics.Color;
 import android.widget.TextView;
+
 public class AboutDialog extends Dialog{
 private static Context mContext = null;
 public AboutDialog(Context context) {

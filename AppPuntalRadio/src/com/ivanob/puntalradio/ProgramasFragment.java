@@ -1,5 +1,9 @@
 package com.ivanob.puntalradio;
 
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -8,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,6 +22,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.ivanob.puntalradio.model.RadioProgram;
+import com.ivanob.puntalradio.model.RadioProgrammingManager;
 
 
 public class ProgramasFragment extends Fragment{
@@ -51,6 +58,27 @@ public class ProgramasFragment extends Fragment{
 			nombreProg.setTextAppearance(getActivity(), R.style.boldText);
 			//nombreProg.setBackgroundResource(R.color.highlightedTextViewColor);
 			tr.addView(nombreProg);
+			
+			final int j=i;
+			nombreProg.setOnClickListener(new OnClickListener() {
+	            @Override
+	            public void onClick(View v) {
+	            	RadioProgram prog = progManager.getProgram(j);
+	            	try {
+	            		//Load the extra info of the program
+						progManager.loadProgramDetails(prog, getActivity());
+					} catch (XmlPullParserException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            	ProgramInfoDialog infoPanel = new ProgramInfoDialog(getActivity(), prog);
+	            	infoPanel.setTitle(prog.getNombre());
+	            	infoPanel.show();
+	            }
+	        });
 			
 			//LinearLayout botonera = new LinearLayout(getActivity());
 			//botonera.setPadding(0,0,0,0);

@@ -1,8 +1,10 @@
-package com.ivanob.puntalradio;
+package com.ivanob.puntalradio.model;
 
 import java.io.IOException;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.ivanob.puntalradio.R;
+import com.ivanob.puntalradio.R.string;
 
 import android.app.Activity;
 import android.content.Context;
