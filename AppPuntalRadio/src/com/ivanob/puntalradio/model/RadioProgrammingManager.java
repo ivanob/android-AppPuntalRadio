@@ -127,7 +127,7 @@ public class RadioProgrammingManager {
 					if (tagname.equalsIgnoreCase("programa")) {
                     }else if (tagname.equalsIgnoreCase("nombre")) {
                         String s = text;
-                    	prog.setNombre(s);
+                    	prog.setNombreLargo(s);
                     }else if (tagname.equalsIgnoreCase("logo")) {
                     	String s = text;
                     	s = s.substring(0, s.lastIndexOf('.'));

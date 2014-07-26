@@ -31,6 +31,7 @@ public class ProgramInfoDialog extends Dialog{
 	*/
 	public void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.info_program);
+		this.setTitle(prog.getNombreLargo());
 		ImageView iv = (ImageView)findViewById(R.id.logo);
 		iv.setImageResource(prog.getIdLogo());
 		

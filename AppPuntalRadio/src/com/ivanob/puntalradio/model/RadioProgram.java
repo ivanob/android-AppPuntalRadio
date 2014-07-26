@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class RadioProgram {
 	private String nombre;
+	private String nombreLargo;
 	private String ficheroDesc;
 	private int idLogo;
 	private String descripcion;
@@ -57,6 +58,14 @@ public class RadioProgram {
 
 	public void setHorario(String horario) {
 		this.horario = horario;
+	}
+
+	public String getNombreLargo() {
+		return nombreLargo;
+	}
+
+	public void setNombreLargo(String nombreLargo) {
+		this.nombreLargo = nombreLargo;
 	}
 	
 }

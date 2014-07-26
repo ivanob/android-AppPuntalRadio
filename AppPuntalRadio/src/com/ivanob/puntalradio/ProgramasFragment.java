@@ -132,8 +132,20 @@ public class ProgramasFragment extends Fragment{
 			//tr.addView(botonera);
 			
 			tl.addView(tr); //Add the row to the table
+			
+			if(i!=progManager.getNumPrograms()-1){
+				tl.addView(createBlackSeparator());
+			}
 		}
 		
 		super.onActivityCreated(savedInstanceState);
 	}
+	
+	private View createBlackSeparator(){
+		View v = new View(getActivity());
+		v.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, 1));
+		v.setBackgroundColor(Color.rgb(51, 51, 51));
+		return v;
+	}
+	
 }
