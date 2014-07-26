@@ -135,9 +135,13 @@ public class RadioProgrammingManager {
                     	prog.setIdLogo(idLogo);
                     }else if (tagname.equalsIgnoreCase("descripcion")) {
                     	String s = text;
+                    	s = s.replaceAll("[\n\r]", "");
+                    	s = s.trim().replaceAll(" +", " ");
                     	prog.setDescripcion(s);
                     }else if (tagname.equalsIgnoreCase("horario")) {
                     	String s = text;
+                    	s = s.replaceAll("[\n\r]", "");
+                    	s = s.replaceAll("\r", "");
                     	prog.setHorario(s);
                     }  
 					break;
