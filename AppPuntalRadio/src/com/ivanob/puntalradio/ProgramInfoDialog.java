@@ -35,9 +35,9 @@ public class ProgramInfoDialog extends Dialog{
 		iv.setImageResource(prog.getIdLogo());
 		
 		TextView tv = (TextView)findViewById(R.id.legal_text);
-		tv.setText(readRawTextFile(R.raw.legal));
+		tv.setText(prog.getHorario());
 		tv = (TextView)findViewById(R.id.info_text);
-		tv.setText(Html.fromHtml(readRawTextFile(R.raw.info)));
+		tv.setText(prog.getDescripcion());
 		//tv.setLinkTextColor(Color.WHITE);
 		tv.setLinkTextColor(Color.BLUE);
 		Linkify.addLinks(tv, Linkify.ALL);
