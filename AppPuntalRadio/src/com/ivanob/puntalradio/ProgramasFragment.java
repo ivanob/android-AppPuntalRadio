@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.ivanob.puntalradio.model.RadioProgram;
@@ -32,6 +33,9 @@ public class ProgramasFragment extends Fragment{
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+		Toast.makeText(getActivity(), 
+				getActivity().getResources().getString(R.string.info_programas),
+				Toast.LENGTH_SHORT).show();
 		progManager= RadioProgrammingManager.getInstance(this.getResources());
 		return inflater.inflate(R.layout.programas_fragment, container, false);
 	}
