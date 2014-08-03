@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -33,9 +34,6 @@ public class ProgramasFragment extends Fragment{
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-		Toast.makeText(getActivity(), 
-				getActivity().getResources().getString(R.string.info_programas),
-				Toast.LENGTH_SHORT).show();
 		progManager= RadioProgrammingManager.getInstance(this.getResources());
 		return inflater.inflate(R.layout.programas_fragment, container, false);
 	}
@@ -134,7 +132,9 @@ public class ProgramasFragment extends Fragment{
 			}
 			//botonera.setGravity(Gravity.CENTER_VERTICAL);
 			//tr.addView(botonera);
-			
+			if(prog.getNumMediaURL()==0){ //Si no tiene accesos directos, le pongo un tamanio minimo
+				tr.setMinimumHeight(65);
+			}
 			tl.addView(tr); //Add the row to the table
 			
 			if(i!=progManager.getNumPrograms()-1){

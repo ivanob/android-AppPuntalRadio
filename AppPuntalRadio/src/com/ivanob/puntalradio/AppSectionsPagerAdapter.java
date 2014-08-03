@@ -22,12 +22,12 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
         switch (i) {
             case 0:
                 return new PortadaFragment();
-                    
             case 1:
                 return new ParrillaFragment();
-
+            case 2:
+            	return new ProgramasFragment();
             default:
-                return new ProgramasFragment();
+            	return new PortadaFragment();
         }
     }
 

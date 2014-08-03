@@ -20,6 +20,6 @@
     <color name="highlightedTextViewColor">#000088</color>
 	<color name="normalTextViewColor">#000044</color>
 	
-	<string name="info_programas">Toca en el nombre de cada programa para más información</string>
+	<string name="info_programas">Toca en el nombre de cada programa para obtener más información</string>
     
 </resources>

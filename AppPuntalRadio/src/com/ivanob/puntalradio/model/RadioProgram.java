@@ -35,6 +35,10 @@ public class RadioProgram {
 	public void addMediaURL(String service, String url){
 		media.put(service,url);
 	}
+	
+	public int getNumMediaURL(){
+		return media.size();
+	}
 
 	public int getIdLogo() {
 		return idLogo;
