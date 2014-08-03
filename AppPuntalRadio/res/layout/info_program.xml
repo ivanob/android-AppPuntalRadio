@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
+    android:background="@color/verde_background_info"
     android:orientation="vertical" >
     
     <LinearLayout
@@ -30,7 +31,7 @@
 		android:layout_width="fill_parent"
 		android:textSize="10dip"
 		android:layout_margin="8dip"
-		
+		android:textColor="@color/negro"
 		android:layout_height="fill_parent" />
 	</LinearLayout>
 	
@@ -42,7 +43,7 @@
 	android:textStyle="italic"
 	android:layout_span="2"
 	android:layout_margin="8dip"
-	android:textColor="#cccccc" />
+	android:textColor="@color/gris_letra_horarios" />
     
 </LinearLayout>
 	

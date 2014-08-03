@@ -1,4 +1,4 @@
 <h3>App Puntal Radio</h3>
-Versión 1.0, Abril 2014<br>
+Versión 1.1, Agosto 2014<br>
 Desarrollador: Iván Obeso Agüera<br>
 &lt;ivan.obeso.dev@gmail.com&gt;<br>
